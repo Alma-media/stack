@@ -6,6 +6,12 @@ type Stack struct {
 	size int
 }
 
+// New creates a stack. It is "sugar" to avoid calling "new(stack.Stack)" since
+// "stack.New()" looks a bit nicer =)
+func New() *Stack {
+	return new(Stack)
+}
+
 // Element is the single element of the Stack.
 type Element struct {
 	value interface{}

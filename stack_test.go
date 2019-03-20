@@ -4,7 +4,7 @@ import "testing"
 
 func TestStack(t *testing.T) {
 	t.Run("Given an empty stack", func(t *testing.T) {
-		stack := new(Stack)
+		stack := New()
 
 		if stack.size != 0 {
 			t.Error("stack should be empty after initialization")
