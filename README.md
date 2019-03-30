@@ -35,7 +35,7 @@ func main() {
 	stk.Push(c)
 
 	// get top element
-	fmt.Println(stk.Top(), stk.Len()) // 3 2
+	fmt.Println(stk.Top(), stk.Len()) // 3 3
 
 	// pop element
 	fmt.Println(stk.Pop(), stk.Pop(), stk.Pop(), stk.Len()) // 3 2 1 0
