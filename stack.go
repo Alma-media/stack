@@ -1,49 +1,45 @@
 package stack
 
 // Stack for elements.
-type Stack struct {
-	top  *Element
+type Stack[T any] struct {
+	top  *Element[T]
 	size int
 }
 
-// New creates a stack. It is "sugar" to avoid calling "new(stack.Stack)" since
-// "stack.New()" looks a bit nicer =)
-func New() *Stack {
-	return new(Stack)
-}
-
 // Element is the single element of the Stack.
-type Element struct {
-	value interface{}
-	next  *Element
+type Element[T any] struct {
+	value T
+	next  *Element[T]
 }
 
 // Len returns the stack's length.
-func (s *Stack) Len() int {
+func (s *Stack[T]) Len() int {
 	return s.size
 }
 
 // Push a new element onto the stack.
-func (s *Stack) Push(value interface{}) {
-	s.top = &Element{value, s.top}
+func (s *Stack[T]) Push(value T) {
+	s.top = &Element[T]{value, s.top}
 	s.size++
 }
 
-// Top returns a pointer to the top element of the stack.
-func (s *Stack) Top() interface{} {
+// Top returns a value of the top element of the stack.
+func (s *Stack[T]) Top() (value T, ok bool) {
 	if s.size > 0 {
-		return s.top.value
+		return s.top.value, true
 	}
-	return nil
+
+	return
 }
 
-// Pop removes the top element from the stack and returns it's value. If the stack
-// is empty nil is returned.
-func (s *Stack) Pop() (value interface{}) {
+// Pop removes the top element from the stack and returns it's value.
+func (s *Stack[T]) Pop() (value T, ok bool) {
 	if s.size > 0 {
 		value, s.top = s.top.value, s.top.next
 		s.size--
-		return
+
+		return value, true
 	}
-	return nil
+
+	return
 }

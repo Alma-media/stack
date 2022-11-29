@@ -27,7 +27,7 @@ func main() {
 	var a, b, c = 1, 2, 3
 
 	// init stack
-	stk := stack.New()
+	stk := new(stack.Stack[int])
 
 	// push elements
 	stk.Push(a)
@@ -35,10 +35,15 @@ func main() {
 	stk.Push(c)
 
 	// get top element
-	fmt.Println(stk.Top(), stk.Len()) // 3 3
+	fmt.Println(stk.Top()) // 3 true
+	fmt.Println(stk.Len()) // 3
 
-	// pop element
-	fmt.Println(stk.Pop(), stk.Pop(), stk.Pop(), stk.Len()) // 3 2 1 0
+
+	// pop elements
+	fmt.Println(stk.Pop()) // 3 true
+	fmt.Println(stk.Pop()) // 2 true
+	fmt.Println(stk.Pop()) // 1 true
+	fmt.Println(stk.Pop()) // 0 false
 }
 
 ```

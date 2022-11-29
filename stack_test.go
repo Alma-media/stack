@@ -1,18 +1,18 @@
-package stack
+package stack_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/tiny-go/stack"
+)
 
 func TestStack(t *testing.T) {
 	t.Run("Given an empty stack", func(t *testing.T) {
-		stack := New()
-
-		if stack.size != 0 {
-			t.Error("stack should be empty after initialization")
-		}
+		stack := new(stack.Stack[int])
 
 		t.Run("test if 'nil' is returned when Top() is called on empty stack", func(t *testing.T) {
-			if stack.Top() != nil {
-				t.Error("nil was expected")
+			if _, ok := stack.Top(); ok {
+				t.Error("stack was expected to be empty")
 			}
 		})
 
@@ -23,16 +23,16 @@ func TestStack(t *testing.T) {
 			}
 		})
 
-		top := stack.Top()
+		top, ok := stack.Top()
 		t.Run("test if Top() points to the correct element in the stack", func(t *testing.T) {
-			if top != 42 {
+			if !ok || top != 42 {
 				t.Errorf("unexpected value was returned: %v", top)
 			}
 		})
 
-		pop := stack.Pop()
+		pop, ok := stack.Pop()
 		t.Run("test if Pop() returns expected value", func(t *testing.T) {
-			if pop != 42 {
+			if !ok || pop != 42 {
 				t.Errorf("unexpected value was returned: %v", pop)
 			}
 		})
@@ -44,8 +44,8 @@ func TestStack(t *testing.T) {
 		})
 
 		t.Run("test if 'nil' is returned when Pop() is called on empty stack", func(t *testing.T) {
-			if stack.Pop() != nil {
-				t.Error("nil was expected")
+			if _, ok := stack.Pop(); ok {
+				t.Error("stack was expected to be empty")
 			}
 		})
 	})
